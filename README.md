@@ -1,24 +1,48 @@
-# README
+# Rails7 + PostgreSQL環境構築
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+①Gemfile, Gemfile.lock, Dockerfile,docker-compose.ymlファイルを作成する　　
 
-* Ruby version
 
-* System dependencies
+②Gemfile, Dockerfile,docker-compose.ymlを編集する　　
 
-* Configuration
+＊備考
 
-* Database creation
+・NameError: uninitialized constant Gem::Sourceのエラーが出たため、Bundlerをアップデートするために、Dockerfileにgem update --systemおよびbundle update --bundlerを実行するように修正
 
-* Database initialization
+・Rails 7ではWebpackerが標準では組み込まれなくなったので、yarnやnodejsのインストールが不要になった。　　
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+③docker compose run --rm web rails new . --force --database=postgresqlを実行　　
 
-* Deployment instructions
 
-* ...
+④database.ymlファイル設定編集。　　
+
+*rails new を実行したことにより、 Gemfile が変更されるので、新しい gem をインストールするために、コンテナを再ビルドして起動。　　
+
+docker compose build (docker compose up --build)　　
+
+docker compose up　　
+
+
+⑤データベースの作成　　
+
+docker compose exec web rails db:create　　
+
+railsが起動できる状態になる　　
+
+参考サイト　　
+
+https://zenn.dev/hs7/articles/2cc4d67650ba69　　
+
+https://zenn.dev/lirais/articles/fe240a0c248783　　
+
+https://docs.docker.jp/compose/rails.html?highlight=rails　　
+
+https://qiita.com/croquette0212/items/7b99d9339fd773ddf20b　　
+
+https://qiita.com/P-man_Brown/items/32fdba14e88219f8d2f0　　
+
+https://qiita.com/P-man_Brown/items/32fdba14e88219f8d2f0　　
+
+https://qiita.com/koyo-miyamura/items/5f1d123046917782e111　　
