@@ -46,3 +46,7 @@ https://qiita.com/P-man_Brown/items/32fdba14e88219f8d2f0　　
 https://qiita.com/P-man_Brown/items/32fdba14e88219f8d2f0　　
 
 https://qiita.com/koyo-miyamura/items/5f1d123046917782e111　　
+
+https://gist.github.com/kkmory/400a0faf95f2d3b2c7638b55fc0f4a9a
+
+https://abillyz.com/watanabe/studies/244

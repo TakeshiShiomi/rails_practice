@@ -1,12 +1,14 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     # 無くても動くけど指定しておくとdocker-composeを停止してもdbの内容が永続化されるため、指定することが多いと思われる
     # https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_volume:/var/lib/postgresql/data
     # 無くても動くが指定しておくとコンテナ停止時にサービスが再起動してくれる
