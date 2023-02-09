@@ -9,4 +9,12 @@
     <%= user.email %>
   </p>
 
+  <p>
+    <strong>content:</strong>
+    <% user.posts.each do |post| %>
+      <%= post.id %>
+      <%= post.content %>
+    <% end %>
+  </p>
+
 </div>
