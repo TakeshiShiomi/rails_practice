@@ -4,6 +4,9 @@ class StaticPagesController < ApplicationController
 
   def help
   end
+  
+  def about
+  end
 end
 
 #純粋なRuby言語であれば、これらのメソッドは何も実行しません。しかし、Railsでは動作が異なります。
