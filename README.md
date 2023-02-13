@@ -31,3 +31,6 @@
   $ rails db:rollback
 最初の状態に戻したいときは、VERSION=0オプションを使います。
   $ rails db:migrate VERSION=0
+
+  演習③
+  ・カスタムヘルパー追加
