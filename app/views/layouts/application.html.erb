@@ -12,6 +12,10 @@
 
   <body>
   <h1> <%= full_title(yield(:title)) %></h1> 
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>
