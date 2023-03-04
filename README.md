@@ -1,56 +1,66 @@
-# Railsの演習
-①演習1
-・scaffoldでuser,postテーブル作成
-・userとpostの紐付け及びuser側にpostを表示。https://qiita.com/bitarx/items/a07c15e39ab1382396d4 参照。
+# Rails の演習
+
+① 演習 1
+・scaffold で user,post テーブル作成
+・user と post の紐付け及び user 側に post を表示。https://qiita.com/bitarx/items/a07c15e39ab1382396d4 参照。
 ・一部バリデーション実装
 
 知識として
-・UserモデルとPostモデルはいずれも、ApplicationRecordというクラスを継承している。（Rubyでは継承関係を<記号で表現）。また、ApplicationRecordクラスは、Active Recordが提供する基本クラス ActiveRecord::Baseを継承。
-・コントローラーも同様でいずれもApplicationControllerを継承。ApplicationControllerがActionController::Baseクラスを継承。
-・モデルの継承関係と同様に、UsersコントローラもMicropostsコントローラも最終的にはActionController::Baseという基本クラスを継承しています。このため、どちらのコントローラもモデルオブジェクトの操作や、送られてくるHTTP requestのフィルタリング、ビューをHTMLとして出力するなどの多彩な機能を実行できるようになっています。Railsのコントローラは必ずApplicationControllerを継承しているので、Applicationコントローラで定義したルールは、アプリケーションのすべてのアクションに反映されます。例えば9.1では、ログインとログアウト用のヘルパーメソッドをサンプルアプリケーションのすべてのコントローラで利用できるようにしています。
+・User モデルと Post モデルはいずれも、ApplicationRecord というクラスを継承している。（Ruby では継承関係を<記号で表現）。また、ApplicationRecord クラスは、Active Record が提供する基本クラス ActiveRecord::Base を継承。
+・コントローラーも同様でいずれも ApplicationController を継承。ApplicationController が ActionController::Base クラスを継承。
+・モデルの継承関係と同様に、Users コントローラも Microposts コントローラも最終的には ActionController::Base という基本クラスを継承しています。このため、どちらのコントローラもモデルオブジェクトの操作や、送られてくる HTTP request のフィルタリング、ビューを HTML として出力するなどの多彩な機能を実行できるようになっています。Rails のコントローラは必ず ApplicationController を継承しているので、Application コントローラで定義したルールは、アプリケーションのすべてのアクションに反映されます。例えば 9.1 では、ログインとログアウト用のヘルパーメソッドをサンプルアプリケーションのすべてのコントローラで利用できるようにしています。
 
-演習②
+演習 ②
 ・コントローラ作成
 ・テスト駆動開発
-・重複を取り除く１つビューで埋め込みRuby
+・重複を取り除く１つビューで埋め込み Ruby
 
 知識
-・どれほど十分に気を付けていたとしても、Railsアプリケーションの開発中に何か失敗してしまうことはありえます。ありがたいことに、Railsにはそのような失敗をカバーする機能がいくつもあります。
-一般的なシナリオの1つは、生成したコードを元に戻したい場合です。例えばコントローラを生成した後で、もっといいコントローラ名を思い付き、生成したコードを削除したくなった場合などです。Railsはコントローラ以外にも関連ファイルを大量に生成するので、生成されたコントローラファイルを削除するだけでは元に戻りません。自動生成されたコードを元に戻すためには、新規作成されたファイルを削除するだけではなく、既存のファイルに挿入されたコードも削除する必要があります（rails generateを実行するとroutes.rbファイルも自動的に変更されるので、これも元に戻さなくてはなりません）。このようなときは、「generate」という言葉に因んで、rails destroyというコマンドを実行することで元に戻すことができます。例えば次の2つのコマンドは、自動生成と、それに対応する取り消し処理の例です。
+・どれほど十分に気を付けていたとしても、Rails アプリケーションの開発中に何か失敗してしまうことはありえます。ありがたいことに、Rails にはそのような失敗をカバーする機能がいくつもあります。
+一般的なシナリオの 1 つは、生成したコードを元に戻したい場合です。例えばコントローラを生成した後で、もっといいコントローラ名を思い付き、生成したコードを削除したくなった場合などです。Rails はコントローラ以外にも関連ファイルを大量に生成するので、生成されたコントローラファイルを削除するだけでは元に戻りません。自動生成されたコードを元に戻すためには、新規作成されたファイルを削除するだけではなく、既存のファイルに挿入されたコードも削除する必要があります（rails generate を実行すると routes.rb ファイルも自動的に変更されるので、これも元に戻さなくてはなりません）。このようなときは、「generate」という言葉に因んで、rails destroy というコマンドを実行することで元に戻すことができます。例えば次の 2 つのコマンドは、自動生成と、それに対応する取り消し処理の例です。
 
-  $ rails generate controller StaticPages home help
-  $ rails destroy  controller StaticPages home help
+$ rails generate controller StaticPages home help
+$ rails destroy controller StaticPages home help
 
 モデルの自動生成についても、同様の方法で元に戻すことができます。
-  $ rails generate model User name:string email:string
-  $ rails destroy model User
+$ rails generate model User name:string email:string
+$ rails destroy model User
 
-マイグレーションの変更を元に戻す方法も用意されています。まずdb:migrateでデータベースのマイグレーションを変更します。
-  $ rails db:migrate
-元に戻したいときは、db:rollbackで1つ前の状態に戻します。
-  $ rails db:rollback
-最初の状態に戻したいときは、VERSION=0オプションを使います。
-  $ rails db:migrate VERSION=0
+マイグレーションの変更を元に戻す方法も用意されています。まず db:migrate でデータベースのマイグレーションを変更します。
+$ rails db:migrate
+元に戻したいときは、db:rollback で 1 つ前の状態に戻します。
+$ rails db:rollback
+最初の状態に戻したいときは、VERSION=0 オプションを使います。
+$ rails db:migrate VERSION=0
 
-  演習③
-  ・カスタムヘルパー追加
+演習 ③
+・カスタムヘルパー追加
 
+演習 ④
+・パーシャル機能（render による Rails ヘルパー呼び出し）追加
+・CSS の追加
+・ルーティングの編集
+・統合テスト実施
 
-  演習④
-  ・パーシャル機能（renderによるRailsヘルパー呼び出し）追加
-  ・CSSの追加
-  ・ルーティングの編集
-  ・統合テスト実施
+演習 ⑤
+・モデル作成、バリデーション追加
+・テスト追加
+・データベースにインデックスを追加
+・has_secure_password メソッドを使うことで、モデルに対してセキュアなパスワードを追加
 
-  演習⑤
-  ・モデル作成、バリデーション追加
-  ・テスト追加
-  ・データベースにインデックスを追加
-  ・has_secure_passwordメソッドを使うことで、モデルに対してセキュアなパスワードを追加
-
-  演習⑥
-  ・Gravatarを用いた、ユーザーのプロフィール画像表示
-  ・form_withヘルパーは、Active Recordのオブジェクトに対応したフォームを生成する
-　・ユーザー登録に失敗した場合はnewビューを再描画するようにした。その際、Active Recordが自動的に検知したエラーメッセージを表示できるようにしたflash変数を使うと、一時的なメッセージを表示できるようになる
+演習 ⑥
+・Gravatar を用いた、ユーザーのプロフィール画像表示
+・form_with ヘルパーは、Active Record のオブジェクトに対応したフォームを生成する
+　・ユーザー登録に失敗した場合は new ビューを再描画するようにした。その際、Active Record が自動的に検知したエラーメッセージを表示できるようにした flash 変数を使うと、一時的なメッセージを表示できるようになる
 　・ユーザー登録に成功すると、データベース上にユーザーが追加、プロフィールページにリダイレクト、ウェルカムメッセージの表示といった順で処理が進む
 　・統合テストを使うことで送信フォームの振る舞いを検証したり、バグの発生を検知したりできる
+
+演習 ⑦
+・Rails の session メソッドを使うと、あるページから別のページに移動するときの状態を保持できる。一時的な状態の保存には cookies も使える
+・ログインフォームでは、ユーザーがログインするための新しいセッションが作成できる
+・flash.now メソッドを使うと、描画済みのページにもフラッシュメッセージを表示できる
+・テスト駆動開発は、回帰バグを防ぐときに便利
+・session メソッドを使うと、ユーザー ID などをブラウザに一時的に保存できる
+・ログインの状態に応じて、ページ内で表示するリンクを切り替えることができる
+・統合テストでは、ルーティング、データベースの更新、レイアウトの変更が正しく行われているかを確認できる
+※rails6,7 の互換性の問題で jQuery が上手く機能しないので一旦後回しにする。

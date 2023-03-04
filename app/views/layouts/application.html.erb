@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
-
+    <script src="<%= javascript_path 'application' %>"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <body>
   <h1> <%= full_title(yield(:title)) %></h1> 
     <%= render 'layouts/header' %>
